@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routes.candidates import router as candidates_router
@@ -23,6 +22,8 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://skill-graph-topaz.vercel.app",
+        "https://skill-graph-one.vercel.app",
     ],
     allow_credentials=True,
     allow_methods=["*"],
