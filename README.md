@@ -2,253 +2,238 @@
 
 > Graph-based Developer Skill & Job Intelligence Platform
 
-SkillGraph is a full-stack application that uses a graph database to model relationships between candidates, skills, projects, technologies, jobs, and companies.
+SkillGraph is a full-stack application that connects candidates, skills, projects, technologies, jobs, and companies using a graph database.
 
-The platform analyzes a candidate's existing skills and projects, matches them against job requirements, identifies skill gaps, and visualizes the relationships through an interactive knowledge graph.
-
----
+It analyzes candidate skills, matches them with job requirements, identifies missing skills, and visualizes the relationships through an interactive knowledge graph.
 
 ## Features
 
-- Candidate profile management
-- Skill and proficiency tracking
+- Candidate profile and skill analysis
+- Skill proficiency and experience tracking
 - Project and technology mapping
 - Graph-based job matching
-- Job match percentage calculation
-- Missing-skill identification
-- Company and job relationship analysis
-- Interactive knowledge graph visualization
-- REST APIs using FastAPI
+- Match percentage calculation
+- Missing skill detection
+- Company and job relationships
+- Interactive knowledge graph
+- FastAPI REST APIs
 - React + Vite frontend
-- CognoDB / Neo4j-compatible graph database
-- Swagger/OpenAPI API documentation
+- CognoDB Cloud graph database
+- Swagger/OpenAPI documentation
 
----
+## Technology Stack
+
+**Backend**
+- Python
+- FastAPI
+- Uvicorn
+- Neo4j Python Driver
+- python-dotenv
+
+**Frontend**
+- React
+- Vite
+- JavaScript
+- CSS
+- Cytoscape.js
+
+**Database**
+- CognoDB Cloud
+- Neo4j-compatible Cypher
+- Bolt protocol
 
 ## Architecture
 
 ```text
-                    ┌──────────────────────┐
-                    │     React + Vite     │
-                    │      Frontend        │
-                    └──────────┬───────────┘
-                               │
-                               │ REST API
-                               ▼
-                    ┌──────────────────────┐
-                    │       FastAPI        │
-                    │       Backend        │
-                    └──────────┬───────────┘
-                               │
-                               │ Cypher
-                               ▼
-                    ┌──────────────────────┐
-                    │   CognoDB / Neo4j    │
-                    │    Graph Database    │
-                    └──────────────────────┘
-```
+React + Vite
+     │
+     │ REST API
+     ▼
+FastAPI Backend
+     │
+     │ Cypher / Bolt
+     ▼
+CognoDB Cloud
+````
 
 ## Graph Model
 
-SkillGraph represents developer intelligence using connected graph entities.
+```text
+Candidate ──HAS_SKILL──► Skill
+Candidate ──BUILT──────► Project
+Project ────USES───────► Technology
+Job ────────REQUIRES───► Skill
+Company ────OFFERS─────► Job
+```
 
-Candidate
-   │
-   ├── HAS_SKILL ──► Skill
-   │
-   ├── BUILT ──────► Project
-   │                    │
-   │                    └── USES ──► Technology
-   │
-   └── MATCHES ────► Job
-                         │
-                         └── OFFERED_BY ──► Company
+## Project Structure
 
-The graph allows the application to perform relationship-based queries rather than treating candidate information as isolated records.
-
-Technology Stack
-Backend
-Python
-FastAPI
-Uvicorn
-Neo4j Python Driver
-Jinja2
-python-dotenv
-Frontend
-React
-Vite
-JavaScript
-CSS
-Cytoscape.js
-Database
-CognoDB Cloud
-Neo4j-compatible Cypher
-Bolt protocol
-Project Structure
+```text
 Skill_Graph/
-│
 ├── app/
-│   ├── config.py
-│   ├── database.py
 │   ├── main.py
-│   │
-│   ├── routes/
-│   │   ├── candidates.py
-│   │   ├── jobs.py
-│   │   └── graph.py
-│   │
-│   └── services/
-│       ├── candidate_service.py
-│       └── job_service.py
-│
+│   ├── database.py
+│   └── routes/
+│       ├── candidates.py
+│       ├── jobs.py
+│       └── graph.py
 ├── database/
-│   ├── schema.cypher
-│   ├── seed.cypher
-│   └── queries.cypher
-│
 ├── scripts/
-│   ├── seed_database.py
-│   └── check_database.py
-│
 ├── tests/
-│   ├── test_database.py
-│   └── test_job_query.py
-│
 ├── frontend/
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── vite.config.js
-│
 ├── static/
 ├── templates/
-│
 ├── .env.example
 ├── .gitignore
 ├── requirements.txt
 └── README.md
-Backend Setup
-1. Clone the repository
+```
+
+## Setup
+
+### Backend
+
+```bash
 git clone https://github.com/bobbydevarapu/Skill_Graph.git
 cd Skill_Graph
-2. Create a virtual environment
-
-Windows:
 
 python -m venv .venv
-
-Activate it:
-
 .venv\Scripts\activate
-3. Install dependencies
+
 pip install -r requirements.txt
-Environment Variables
+```
 
-Create a .env file based on .env.example.
+### Environment Variables
 
-Example:
+Create `.env`:
 
+```env
 NEO4J_URI=bolt+s://your-database-endpoint
 NEO4J_USERNAME=your-username
 NEO4J_PASSWORD=your-password
+```
 
+Do not commit `.env`.
 
-### From the project root:
+### Database
 
+```bash
+python scripts/seed_database.py
+python scripts/check_database.py
+```
+
+### Run Backend
+
+```bash
 uvicorn app.main:app --reload
+```
 
-The API will be available at:
+Backend:
 
+```text
 http://127.0.0.1:8000
+```
 
+Swagger:
 
-### The response includes:
+```text
+http://127.0.0.1:8000/docs
+```
 
-matched skills
-required skills
-missing skills
-match percentage
-Knowledge Graph
+## API
+
+```text
+GET /api/health
+GET /api/candidates/{candidate_id}
+GET /api/candidates/{candidate_id}/skills
+GET /api/candidates/{candidate_id}/projects
+GET /api/jobs/match/{candidate_id}
 GET /api/graph/{candidate_id}
+```
 
-Returns graph nodes and relationships for visualization.
+## Job Matching
 
-Job Matching
+The system compares candidate skills with required job skills and returns matched skills, missing skills, and match percentage.
 
-The matching engine compares:
+Example:
 
-Candidate Skills
-        │
-        ▼
-Required Job Skills
-        │
-        ▼
-Matched Skills
-        │
-        ▼
-Match Percentage
-        │
-        ▼
-Missing Skills
-
-For example:
-
+```text
 Backend Developer
-
-Required Skills: 4
-Matched Skills: 4
 Match: 100%
 
-Missing Skills: None
-
-For a partially matched role:
-
 AWS Cloud Engineer
-
-Required Skills: 4
-Matched Skills: 3
 Match: 75%
+Missing: Kubernetes
+```
 
-Missing:
-Kubernetes
-Frontend
+## Frontend
 
-
-### Navigate to the frontend:
-
+```bash
 cd frontend
-
-Install dependencies:
-
 npm install
-
-### Run the development server:
-
 npm run dev
+```
 
+Build for production:
 
-Example database validation:
+```bash
+npm run build
+```
 
+Preview:
+
+```bash
+npm run preview
+```
+
+## Knowledge Graph
+
+The interactive graph visualizes:
+
+* Candidates
+* Skills
+* Projects
+* Technologies
+* Jobs
+* Companies
+
+## Validation
+
+The project has been tested for:
+
+* Database connectivity
+* Database seeding
+* Candidate APIs
+* Skills APIs
+* Project APIs
+* Job matching
+* Missing skill detection
+* Graph API
+* FastAPI startup
+* React production build
+* Interactive graph visualization
+
+Example database:
+
+```text
 Nodes: 39
 Relationships: 66
 Candidates: 1
 Skills: 13
 Jobs: 6
-Production Architecture
+```
 
-For deployment, the recommended architecture is:
+## Security
 
-React + Vite
-      │
-      ▼
-Frontend Hosting
-      │
-      │ HTTPS
-      ▼
-FastAPI Backend
-      │
-      ▼
-CognoDB Cloud
+Do not commit:
 
-Environment-specific configuration should be used for the production API URL and database credentials.
+```text
+.env
+.venv/
+node_modules/
+frontend/dist/
+__pycache__/
+```
 
+```
+```
