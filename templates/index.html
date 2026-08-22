@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SkillGraph | Developer Intelligence</title>
+
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <!-- Cytoscape.js -->
+  <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js"></script>
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+</head>
+
+<body>
+
+  <!-- =========================================
+         HEADER
+    ========================================== -->
+
+  <header class="header">
+    <div class="container header-content">
+
+      <div>
+        <div class="brand">
+          <span class="brand-mark">S</span>
+          <h1>SkillGraph</h1>
+        </div>
+
+        <p class="subtitle">
+          Developer Skill & Job Intelligence Platform
+        </p>
+      </div>
+
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        System Online
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =========================================
+         MAIN
+    ========================================== -->
+
+  <main class="container dashboard">
+
+
+    <!-- =====================================
+             CANDIDATE PROFILE
+        ====================================== -->
+
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+          <span class="section-label">PROFILE</span>
+          <h2>Candidate Profile</h2>
+          <p>Your developer profile and experience.</p>
+        </div>
+
+      </div>
+
+      <div id="candidate">
+
+        <div class="loading">
+          <div class="spinner"></div>
+          Loading candidate...
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+             SKILLS
+        ====================================== -->
+
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+          <span class="section-label">EXPERTISE</span>
+          <h2>Skills</h2>
+          <p>Technical skills identified from your profile.</p>
+        </div>
+
+      </div>
+
+      <div id="skills">
+
+        <div class="loading">
+          <div class="spinner"></div>
+          Loading skills...
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+             JOB MATCHES
+        ====================================== -->
+
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+          <span class="section-label">INTELLIGENCE</span>
+          <h2>Job Matches</h2>
+          <p>
+            Jobs ranked according to your current skill profile.
+          </p>
+        </div>
+
+        <div id="job-summary"></div>
+
+      </div>
+
+
+      <div id="jobs">
+
+        <div class="loading">
+          <div class="spinner"></div>
+          Loading job matches...
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+             PROJECTS
+        ====================================== -->
+
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+          <span class="section-label">PORTFOLIO</span>
+          <h2>Projects & Technologies</h2>
+          <p>
+            Projects connected to technologies and skills.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div id="projects">
+
+        <div class="loading">
+          <div class="spinner"></div>
+          Loading projects...
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =====================================
+             SKILL GRAPH
+        ====================================== -->
+
+    <section class="card graph-card">
+
+      <div class="section-header">
+
+        <div>
+          <span class="section-label">KNOWLEDGE GRAPH</span>
+
+          <h2>Skill Graph</h2>
+
+          <p>
+            Interactive relationship map between your
+            skills, projects, technologies, jobs and companies.
+          </p>
+        </div>
+
+        <div class="graph-actions">
+
+          <button id="graph-fit" class="secondary-button">
+            Fit Graph
+          </button>
+
+          <button id="graph-reset" class="secondary-button">
+            Reset
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- Legend -->
+
+      <div class="graph-legend">
+
+        <div class="legend-item">
+          <span class="legend-dot candidate-dot"></span>
+          Candidate
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot skill-dot"></span>
+          Skill
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot project-dot"></span>
+          Project
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot technology-dot"></span>
+          Technology
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot job-dot"></span>
+          Job
+        </div>
+
+        <div class="legend-item">
+          <span class="legend-dot company-dot"></span>
+          Company
+        </div>
+
+      </div>
+
+
+      <!-- Graph -->
+
+      <div id="skill-graph">
+
+        <div class="loading">
+          <div class="spinner"></div>
+          Loading SkillGraph...
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+  <footer class="footer">
+
+    <div class="container footer-content">
+
+      <div>
+        <strong>SkillGraph</strong>
+        <span>Developer Intelligence Platform</span>
+      </div>
+
+      <div>
+        Powered by CognoDB
+      </div>
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+  <script src="/static/js/app.js"></script>
+
+</body>
+
+</html>
