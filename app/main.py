@@ -32,6 +32,21 @@ app.add_middleware(
 
 
 # ==========================================
+# ROOT
+# ==========================================
+
+@app.get("/")
+def root():
+    return {
+        "service": "SkillGraph",
+        "status": "online",
+        "message": "SkillGraph API is running",
+        "docs": "/docs",
+        "health": "/api/health",
+    }
+
+
+# ==========================================
 # HEALTH CHECK
 # ==========================================
 
