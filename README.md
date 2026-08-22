@@ -46,8 +46,9 @@ The platform analyzes a candidate's existing skills and projects, matches them a
                     │   CognoDB / Neo4j    │
                     │    Graph Database    │
                     └──────────────────────┘
+```
 
-Graph Model
+## Graph Model
 
 SkillGraph represents developer intelligence using connected graph entities.
 
@@ -151,25 +152,8 @@ NEO4J_URI=bolt+s://your-database-endpoint
 NEO4J_USERNAME=your-username
 NEO4J_PASSWORD=your-password
 
-Never commit the .env file to GitHub.
 
-Database Setup
-
-The project uses Cypher scripts to create the graph schema and seed the initial data.
-
-Run:
-
-python scripts/seed_database.py
-
-Verify the database:
-
-python scripts/check_database.py
-
-The seeded graph contains candidate, skill, project, technology, job, and company entities together with their relationships.
-
-Run the Backend
-
-From the project root:
+### From the project root:
 
 uvicorn app.main:app --reload
 
@@ -177,35 +161,8 @@ The API will be available at:
 
 http://127.0.0.1:8000
 
-Swagger API documentation:
 
-http://127.0.0.1:8000/docs
-
-Health check:
-
-GET /api/health
-API Endpoints
-Candidate
-GET /api/candidates/{candidate_id}
-
-Returns candidate profile information.
-
-Candidate Skills
-GET /api/candidates/{candidate_id}/skills
-
-Returns the candidate's skills, proficiency levels, and experience.
-
-Candidate Projects
-GET /api/candidates/{candidate_id}/projects
-
-Returns projects and their associated technologies and skills.
-
-Job Matching
-GET /api/jobs/match/{candidate_id}
-
-Matches candidate skills against job requirements.
-
-The response includes:
+### The response includes:
 
 matched skills
 required skills
@@ -256,9 +213,8 @@ Missing:
 Kubernetes
 Frontend
 
-The frontend is built with React and Vite.
 
-Navigate to the frontend:
+### Navigate to the frontend:
 
 cd frontend
 
@@ -266,62 +222,10 @@ Install dependencies:
 
 npm install
 
-Run the development server:
+### Run the development server:
 
 npm run dev
 
-Build for production:
-
-npm run build
-
-Preview the production build:
-
-npm run preview
-Knowledge Graph Visualization
-
-The application uses Cytoscape.js to visualize relationships between:
-
-Candidate
-Skills
-Projects
-Technologies
-Jobs
-Companies
-
-The graph supports interactive exploration of the connected data.
-
-Current Demo Data
-
-The project includes a seeded candidate dataset for demonstration and assessment purposes.
-
-The demo candidate is connected to:
-
-Programming skills
-Cloud skills
-DevOps skills
-Backend skills
-AI/ML skills
-Multiple projects
-Multiple technologies
-Multiple job opportunities
-Multiple companies
-
-This seed data is used to demonstrate the graph queries and matching functionality.
-
-Validation
-
-The application has been tested locally for:
-
-Database connectivity
-Database seeding
-Candidate retrieval
-Skill retrieval
-Project retrieval
-Job matching
-Graph retrieval
-FastAPI startup
-React production build
-Interactive graph rendering
 
 Example database validation:
 
@@ -348,34 +252,3 @@ CognoDB Cloud
 
 Environment-specific configuration should be used for the production API URL and database credentials.
 
-Security
-
-Sensitive configuration is stored using environment variables.
-
-The following files and directories should not be committed:
-
-.env
-.venv/
-node_modules/
-frontend/dist/
-__pycache__/
-Purpose
-
-SkillGraph demonstrates how graph databases can be used to build developer intelligence systems by connecting skills, projects, technologies, jobs, and companies into a queryable knowledge graph.
-
-The project focuses on:
-
-Graph data modeling
-Cypher queries
-REST API development
-Job-skill matching
-Knowledge graph visualization
-Full-stack application development
-Author
-
-Bobby Devarapu
-
-B.Tech Computer Science & Engineering
-
-GitHub:
-https://github.com/bobbydevarapu
